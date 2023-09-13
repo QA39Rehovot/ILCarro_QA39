@@ -23,6 +23,26 @@ public class User {
         this.password = password;
     }
 
+    public User withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public User withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public User withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public User withPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
@@ -45,4 +65,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(){};
 }

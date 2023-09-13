@@ -19,6 +19,10 @@ public interface HelperUser extends HelperBase{
         type(By.id("email"), email);
         type(By.id("password"), password);
     }
+    default void fillLoginForm(User user){
+        type(By.id("email"), user.getEmail());
+        type(By.id("password"), user.getPassword());
+    }
     default void fillRegistrationForm(User user){
         type(By.id("name"), user.getName());
         type(By.id("lastName"), user.getLastName());
@@ -60,5 +64,11 @@ public interface HelperUser extends HelperBase{
         click(By.xpath("//button[@type='button']"));
     }
 
+    default void login(User user){
+        openLoginForm();
+        fillLoginForm(user);
+        submitLogin();
+        clickOkButton();
+    }
 
 }
