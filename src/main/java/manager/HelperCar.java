@@ -3,6 +3,7 @@ package manager;
 import models.Car;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +20,7 @@ public interface HelperCar extends HelperBase{
         if(isCarFormPresent()==false) return;
         typeLocation(car.getLocation());
         type(By.id("make"), car.getManufacture());
+//        typeSerialNumber(car.getManufacture());
         type(By.id("model"), car.getModel());
         type(By.id("year"), car.getYear());
         type(By.id("seats"), car.getSeats());
@@ -36,11 +38,19 @@ public interface HelperCar extends HelperBase{
     }
 
     default void typeSerialNumber(String text){
-        Rectangle rect = wd.findElement(By.id("serialNumber")).getRect();
-        int x = rect.getX() + rect.getWidth() * 7 / 8;
-        int y = rect.getY() + rect.getHeight() / 2;
+//        Rectangle rect = wd.findElement(By.id("serialNumber")).getRect();
+//        Rectangle rect = wd.findElement(By.id("make")).getRect();
+//        int x = rect.getX() + rect.getWidth() * 7 / 8;
+//        int x = rect.getWidth() * 7 / 8;
+//        int y = rect.getY() + rect.getHeight() / 2;
+//        int y = rect.getHeight() / 2;
+        WebElement element = wd.findElement(By.id("serialNumber"));
         Actions actions = new Actions(wd);
-        actions.moveByOffset(x, y).click().perform();
+//        actions.moveByOffset(x, y).click().sendKeys(text).perform();
+//        wd.switchTo().activeElement().sendKeys(text);
+        actions.moveToElement(element).click().perform();
+        element.clear();
+        element.sendKeys(text);
     }
 
     default boolean isCarFormPresent(){
