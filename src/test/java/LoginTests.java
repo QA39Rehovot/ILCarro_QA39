@@ -13,6 +13,7 @@ public class LoginTests extends TestBase{
 
     @Test
     public void loginPositiveTest(){
+        logger.info("");
         openLoginForm();
         fillLoginForm("asd@fgh.com", "$Asdf1234");
         submitLogin();
