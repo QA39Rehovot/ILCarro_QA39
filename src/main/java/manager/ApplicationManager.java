@@ -2,10 +2,11 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.TimeUnit;
 
 public interface ApplicationManager {
@@ -13,7 +14,11 @@ public interface ApplicationManager {
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 
 //    WebDriver wd = new ChromeDriver();
-    EventFiringWebDriver wd = new EventFiringWebDriver(new ChromeDriver());
+//    EventFiringWebDriver wd = new EventFiringWebDriver(new ChromeDriver());
+    EventFiringWebDriver wd = System.getProperty("browser", BrowserType.CHROME)
+            .equals(BrowserType.FIREFOX) ?
+            new EventFiringWebDriver(new FirefoxDriver()) :
+            new EventFiringWebDriver(new ChromeDriver());
 
     default void init(){
 //        wd = new ChromeDriver();
@@ -27,7 +32,5 @@ public interface ApplicationManager {
     default void tearDown(){
         wd.quit();
     }
-
-
 
 }
