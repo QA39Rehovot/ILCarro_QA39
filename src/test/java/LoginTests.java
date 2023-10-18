@@ -20,6 +20,14 @@ public class LoginTests extends TestBase{
         Assert.assertTrue(isLoggedSuccess());
     }
     @Test
+    public void loginPositiveTestProps(){
+        logger.info("");
+        openLoginForm();
+        fillLoginForm(getEmail(), getPassword());
+        submitLogin();
+        Assert.assertTrue(isLoggedSuccess());
+    }
+    @Test
     public void loginPositiveTestModel(){
         User user = new User()
                 .withEmail("asd@fgh.com")
